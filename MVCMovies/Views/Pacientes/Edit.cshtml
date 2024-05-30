@@ -1,0 +1,61 @@
+﻿@model MVCMovies.Models.Paciente
+
+@{
+	ViewData["Title"] = "Edit";
+}
+
+<h4 class="text-white text-center mb-3">Modificar Paciente</h4>
+
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<form asp-action="Edit">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="PacienteID" />
+			<div class="form-group">
+				<label asp-for="nombre" class="control-label"></label>
+				<input asp-for="nombre" class="form-control" />
+				<span asp-validation-for="nombre" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="sexo" class="control-label"></label>
+				<select asp-for="sexo" class="form-select">
+					<option value="" selected disabled>Seleccionar sexo</option>
+					<option value="M">Masculino</option>
+					<option value="F">Femenino</option>
+				</select>
+				<span asp-validation-for="sexo" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="fechaNacimiento" class="control-label"></label>
+				<input asp-for="fechaNacimiento" class="form-control" />
+				<span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="email" class="control-label"></label>
+				<input asp-for="email" class="form-control" />
+				<span asp-validation-for="email" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="peso" class="control-label"></label>
+				<input asp-for="peso" class="form-control" />
+				<span asp-validation-for="peso" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="estatura" class="control-label"></label>
+				<input asp-for="estatura" class="form-control" />
+				<span asp-validation-for="estatura" class="text-danger"></span>
+			</div>
+			<div class="form-group mt-3 align-items-center">
+				<input type="submit" value="Actualizar" class="btn btn-outline-primary" />
+				<a asp-action="Index" class="btn btn-outline-danger">Cancelar</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

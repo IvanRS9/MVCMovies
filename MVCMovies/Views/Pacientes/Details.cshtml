@@ -1,0 +1,102 @@
+﻿@model MVCMovies.Models.Paciente
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+<div>
+	<h4 class="text-white text-center">Detalles del paciente</h4>
+	<hr />
+	<dl class="row text-white">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.nombre)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.nombre)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.sexo)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.sexo)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.fechaNacimiento)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.fechaNacimiento)
+		</dd>
+		<dt class="col-sm-2">
+			Edad:
+		</dt>
+		<dd class="col-sm-10">
+			@((DateTime.Now.Year - Model.fechaNacimiento.Year) - (DateTime.Now.DayOfYear < Model.fechaNacimiento.DayOfYear ? 1 : 0) + " años")
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.email)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.email)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.peso)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.peso)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.estatura)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.estatura)
+		</dd>
+		<dt class="col-sm-2">
+			I.M.C:
+		</dt>
+		<dd class="col-sm-10">
+			@if (Model.peso != 0 && Model.estatura != 0)
+			{
+				var imc = Model.peso / (Model.estatura * Model.estatura);
+
+				@imc.ToString("0.00")
+			}
+		</dd>
+		<dt class="col-sm-2">
+			Condición:
+		</dt>
+		<dd class="col-sm-10">
+			@if (Model.peso != 0 && Model.estatura != 0)
+			{
+				var imc = Model.peso / (Model.estatura * Model.estatura);
+				if (imc < 18.5)
+				{
+					<span style="color: #39EB7A">Bajo peso</span>
+				}
+				else if (imc >= 18.5 && imc < 24.9)
+				{
+					<span style="color: #39EB7A">Peso normal</span>
+				}
+				else if (imc >= 25 && imc < 29.9)
+				{
+					<span style="color: #FFC114">Sobrepeso</span>
+				}
+				else if (imc >= 30 && imc < 34.9)
+				{
+					<span style="color: #FFC114">Obesidad tipo 1</span>
+				}
+				else if (imc >= 35 && imc < 39.9)
+				{
+					<span style="color: #dc3545">Obesidad tipo 2</span>
+				}
+				else
+				{
+					<span style="color: #dc3545">Obesidad tipo 3</span>
+				}
+			}
+		</dd>
+	</dl>
+</div>
+<div>
+	<a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@Model?.PacienteID">Modificar</a> |
+	<a asp-action="Index" class="btn btn-outline-danger">Cancelar</a>
+</div>

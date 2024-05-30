@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MVCMovies.Models.Paciente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p class="align-content-end">
+    <a asp-action="Create" class="btn btn-outline-primary w-auto">Registrar nuevo</a>
+</p>
+<div class="table-responsive mt-2">
+    <table class="table table-striped">
+        <thead class="text-center fs-4 text-white">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sexo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fechaNacimiento)
+                </th>
+                <th>
+                    Edad
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.email)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="fs-5 text-center text-white">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-white">
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td class="text-white">
+                        @Html.DisplayFor(modelItem => item.sexo)
+                    </td>
+                    <td class="text-white">
+                        @Html.DisplayFor(modelItem => item.fechaNacimiento)
+                    </td>
+                    <td class="text-white">
+                        @((DateTime.Now.Year - item.fechaNacimiento.Year) - (DateTime.Now.DayOfYear < item.fechaNacimiento.DayOfYear ? 1 : 0))
+                    </td>
+                    <td class="text-white">
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PacienteID" class="btn btn-outline-info">Modificar</a> 
+                        <a asp-action="Details" asp-route-id="@item.PacienteID" class="btn btn-outline-secondary">Detalles</a> 
+                        <a asp-action="Delete" asp-route-id="@item.PacienteID" class="btn btn-outline-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
